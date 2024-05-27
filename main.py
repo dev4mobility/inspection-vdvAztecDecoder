@@ -3,11 +3,21 @@ import zxing
 
 def main():
     reader = zxing.BarCodeReader()
-    barcode = reader.decode("hvvSwitchAztec.png")
+    barcode = reader.decode("assets/test_data/hvvSwitchAztec.png")
     print(barcode)
     decoded_barcode = decode(barcode.raw)
     print(f"This are the HEX Values: {decoded_barcode}")
     barcode_slices(decoded_barcode)
+    convert_list_to_string(decoded_barcode)
+
+
+def convert_list_to_string(hex_values, result_string=None):
+    for i in hex_values:
+        print(f'Starting converting to string: {i}')
+        result_string += ''.join(chr(hex_values[i]))
+    print(f'Result string: {result_string}')
+    barcode_string = result_string
+    return barcode_string
 
 
 def barcode_slices(decoded_barcode):
